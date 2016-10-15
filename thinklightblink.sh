@@ -21,5 +21,4 @@ while(true);
    sleep "$time";
 done;
 
-(printf: "off " | sudo tee /proc/acpi/ibm/light) > /dev/null;
-
+(printf "off " | sudo tee /proc/acpi/ibm/light) > /dev/null;
