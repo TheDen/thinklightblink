@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -o posix
 cleanup() {
    (printf "off" | sudo tee /proc/acpi/ibm/light) > /dev/null;
@@ -13,7 +13,7 @@ control_c() {
 trap control_c SIGINT
 
 printf "Enter the blink time interval (seconds): " ;
-read "time"
+read -r "time"
 while(true);
    do (printf "on" | sudo tee /proc/acpi/ibm/light) > /dev/null;
    sleep "$time";
