@@ -1,35 +1,26 @@
 #!/bin/bash
 
-cleanup()
-# example cleanup function 
-{
-   (echo -n "off " | sudo tee /proc/acpi/ibm/light) >/dev/null;
+cleanup() {
+   (printf "off" | sudo tee /proc/acpi/ibm/light) > /dev/null;
 }
  
-control_c()
-# run if user hits control-c
-{
+control_c() {
   echo -en "\nThinkLight turned off\n"
   cleanup
   exit $?
 }
 
-
-# trap keyboard interrupt (control-c)
+# trap interrupt (control-c)
 trap control_c SIGINT
 
-echo -n "Enter the blink time interval: " ;
+printf "Enter the blink time interval (seconds): " ;
 read "time"
 while(true);
-   do (echo -n "on " | sudo tee /proc/acpi/ibm/light) > /dev/null;
+   do (printf "on" | sudo tee /proc/acpi/ibm/light) > /dev/null;
    sleep $time;
-   (echo -n "off " | sudo tee /proc/acpi/ibm/light) >/dev/null;
+   (printf "off" | sudo tee /proc/acpi/ibm/light) > /dev/null;
    sleep $time;
-done
-(echo -n "off " | sudo tee /proc/acpi/ibm/light) >/dev/null;
+done;
 
-
-# Alternate commands which have permission issues
-#  do echo on > /proc/acpi/ibm/light;
-#  do echo on > /proc/acpi/ibm/light;
+(printf: "off " | sudo tee /proc/acpi/ibm/light) > /dev/null;
 
