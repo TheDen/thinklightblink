@@ -1,5 +1,5 @@
 #!/bin/sh
-set -o posix
+
 cleanup() {
    (printf "off" | sudo tee /proc/acpi/ibm/light) > /dev/null;
 }
